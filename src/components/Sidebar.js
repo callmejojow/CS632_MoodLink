@@ -16,7 +16,7 @@ const Sidebar = ({ isOpen, currentView, setCurrentView, setSidebarOpen }) => {
   };
 
   const renderIcon = (iconType, isSpecial = false) => {
-    const iconClass = `w-5 h-5 ${isSpecial ? 'text-danger-500' : 'text-neutral-500 group-hover:text-primary-600'}`;
+    const iconClass = `w-5 h-5 ${isSpecial ? 'text-danger-500 dark:text-danger-400' : 'text-neutral-500 dark:text-neutral-400 group-hover:text-primary-600 dark:group-hover:text-primary-400'}`;
     
     switch (iconType) {
       case 'home':
@@ -62,12 +62,12 @@ const Sidebar = ({ isOpen, currentView, setCurrentView, setSidebarOpen }) => {
   };
 
   return (
-    <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-neutral-50 shadow-lg border-r border-black transform transition-transform duration-300 ease-in-out min-h-screen
+    <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-neutral-50 dark:bg-neutral-800 shadow-lg border-r border-black dark:border-neutral-700 transform transition-transform duration-300 ease-in-out min-h-screen
       ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
     >
       <div className="flex flex-col h-screen min-h-screen">
-        <div className="p-6 border-b border-black flex-shrink-0">
-          <h2 className="text-lg font-semibold text-neutral-800">Menu</h2>
+        <div className="p-6 border-b border-black dark:border-neutral-700 flex-shrink-0">
+          <h2 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100">Menu</h2>
         </div>
         
         <nav className="flex-1 px-4 pb-4 space-y-2 mt-4 overflow-y-auto">
@@ -75,24 +75,24 @@ const Sidebar = ({ isOpen, currentView, setCurrentView, setSidebarOpen }) => {
             <button
               key={item.id}
               onClick={() => handleMenuClick(item.id)}
-              className={`group w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 border border-black ${
+              className={`group w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 border border-black dark:border-neutral-600 ${
                 currentView === item.id
-                  ? 'bg-primary-100 text-primary-700'
+                  ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
                   : item.special
-                  ? 'text-danger-600 hover:bg-danger-50 bg-neutral-50'
-                  : 'text-neutral-700 hover:bg-neutral-100 bg-neutral-50'
+                  ? 'text-danger-600 dark:text-danger-400 hover:bg-danger-50 dark:hover:bg-danger-900/20 bg-neutral-50 dark:bg-neutral-800'
+                  : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 bg-neutral-50 dark:bg-neutral-800'
               }`}
             >
               <span className="mr-3">
                 {renderIcon(item.icon, item.special)}
               </span>
-              <span className={item.special ? 'text-danger-600' : ''}>{item.label}</span>
+              <span className={item.special ? 'text-danger-600 dark:text-danger-400' : ''}>{item.label}</span>
             </button>
           ))}
         </nav>
         
-        <div className="p-4 border-t border-black flex-shrink-0">
-          <p className="text-xs text-neutral-500 text-center">
+        <div className="p-4 border-t border-black dark:border-neutral-700 flex-shrink-0">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 text-center">
             MoodLink v1.0.0
           </p>
         </div>

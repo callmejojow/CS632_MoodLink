@@ -161,7 +161,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
     <div className="space-y-6">
       {/* Mood Entry Section */}
       <div className="mood-selector-card" onClick={handleBackgroundClick}>
-        <h2 className="text-xl font-semibold text-neutral-800 mb-6">
+        <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-6">
           How are you feeling right now?
         </h2>
         
@@ -175,13 +175,13 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
           {!showNoteInput ? (
             <button
               onClick={() => setShowNoteInput(true)}
-              className="text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors duration-200"
+              className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium transition-colors duration-200"
             >
               + Add more detail (optional)
             </button>
           ) : (
             <div className="space-y-3">
-              <label htmlFor="mood-note" className="block text-sm font-medium text-neutral-700">
+              <label htmlFor="mood-note" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                 How are you feeling? (optional)
               </label>
               <textarea
@@ -189,12 +189,12 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="Share what's on your mind..."
-                className="w-full p-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                className="w-full p-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
                 rows={3}
               />
               <button
                 onClick={() => setShowNoteInput(false)}
-                className="text-neutral-500 hover:text-neutral-700 text-sm transition-colors duration-200"
+                className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 text-sm transition-colors duration-200"
               >
                 Cancel
               </button>
@@ -216,12 +216,12 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
 
         {/* Confirmation Message */}
         {showConfirmation && (
-          <div className="mt-4 p-4 bg-secondary-50 border border-secondary-200 rounded-lg">
+          <div className="mt-4 p-4 bg-secondary-50 dark:bg-secondary-900/20 border border-secondary-200 dark:border-secondary-700 rounded-lg">
             <div className="flex items-center">
-              <svg className="w-5 h-5 text-secondary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-secondary-600 dark:text-secondary-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <p className="text-secondary-800 font-medium">Mood entry saved successfully!</p>
+              <p className="text-secondary-800 dark:text-secondary-200 font-medium">Mood entry saved successfully!</p>
             </div>
           </div>
         )}
@@ -233,11 +233,11 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
         <div className="mood-trends-card">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
             <div>
-              <h3 className="text-lg font-semibold text-neutral-800">
+              <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100">
                 {trendView === 'daily' ? 'Daily Mood Wave' : 'Mood Chart'}
               </h3>
               {trendView === 'daily' && (
-                <p className="text-sm text-neutral-500 mt-1">
+                <p className="text-sm text-neutral-500 dark:text-neutral-300 mt-1">
                   {selectedDate.toLocaleDateString('en-US', { 
                     weekday: 'long', 
                     year: 'numeric', 
@@ -252,7 +252,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
               <button
                 onClick={() => setTrendView('daily')}
                 className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                  trendView === 'daily' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                  trendView === 'daily' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                 }`}
               >
                 Daily
@@ -260,7 +260,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
               <button
                 onClick={() => setTrendView('week')}
                 className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                  trendView === 'week' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                  trendView === 'week' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                 }`}
               >
                 Week
@@ -268,7 +268,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
               <button
                 onClick={() => setTrendView('month')}
                 className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                  trendView === 'month' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                  trendView === 'month' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                 }`}
               >
                 Month
@@ -276,7 +276,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
               <button
                 onClick={() => setTrendView('year')}
                 className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                  trendView === 'year' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                  trendView === 'year' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                 }`}
               >
                 Year
@@ -289,19 +289,19 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
             <div className="flex items-center justify-center space-x-4 mb-6">
               <button
                 onClick={() => navigateDay('prev')}
-                className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+                className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200 text-neutral-600 dark:text-neutral-300"
                 disabled={getDaysWithEntries().findIndex(date => date === selectedDate.toDateString()) >= getDaysWithEntries().length - 1}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              <span className="text-sm font-medium text-neutral-600">
+              <span className="text-sm font-medium text-neutral-600 dark:text-neutral-300">
                 {chartData.filter(d => d.hasData).length} entries on this day
               </span>
               <button
                 onClick={() => navigateDay('next')}
-                className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+                className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200 text-neutral-600 dark:text-neutral-300"
                 disabled={getDaysWithEntries().findIndex(date => date === selectedDate.toDateString()) <= 0}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -431,7 +431,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
               </svg>
             </div>
           ) : (
-            <div className="text-center py-12 text-stone-500">
+            <div className="text-center py-12 text-stone-500 dark:text-neutral-400">
               <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
@@ -452,8 +452,8 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
         >
           <div className="space-y-3">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-warning-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg className="w-4 h-4 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-8 h-8 bg-warning-100 dark:bg-warning-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-warning-600 dark:text-warning-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>

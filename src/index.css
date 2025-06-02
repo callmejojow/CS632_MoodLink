@@ -8,8 +8,9 @@
   }
   
   body {
-    @apply bg-stone-100 text-neutral-800;
+    @apply bg-stone-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-100;
     min-height: 100vh;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 }
 
@@ -30,7 +31,7 @@
   }
   
   .mood-button.selected {
-    @apply border-primary-500 bg-primary-50 scale-105;
+    @apply border-primary-500 bg-primary-50 dark:bg-primary-900/20 scale-105;
   }
   
   .mood-button.selected-mood {
@@ -38,40 +39,60 @@
   }
   
   .card {
-    @apply bg-neutral-50 rounded-xl shadow-sm border border-black p-6;
+    @apply bg-neutral-50 dark:bg-neutral-800 rounded-xl shadow-sm border border-black dark:border-neutral-700 p-6 transition-colors duration-200;
   }
   
-  /* Specific component background colors */
+  /* Specific component background colors - maintain original colors but add dark variants */
   .mood-selector-card {
     background-color: #CEE397;
-    @apply rounded-xl shadow-sm border border-black p-6;
+    @apply rounded-xl shadow-sm border border-black dark:border-neutral-700 p-6 transition-colors duration-200;
+  }
+  
+  .dark .mood-selector-card {
+    background-color: #9bb063; /* Darker variant of secondary-600 */
   }
   
   .insights-card {
     background-color: #4059AD;
-    @apply rounded-xl shadow-sm border border-black p-6;
+    @apply rounded-xl shadow-sm border border-black dark:border-neutral-700 p-6 transition-colors duration-200;
+  }
+  
+  .dark .insights-card {
+    background-color: #2b416b; /* Darker variant of primary-700 */
   }
   
   .mood-trends-card {
     background-color: #F8A460;
-    @apply rounded-xl shadow-sm border border-black p-6;
+    @apply rounded-xl shadow-sm border border-black dark:border-neutral-700 p-6 transition-colors duration-200;
+  }
+  
+  .dark .mood-trends-card {
+    background-color: #e05a2f; /* Darker variant of coral-700 */
   }
   
   .journal-card {
     background-color: #FED880;
-    @apply rounded-xl shadow-sm border border-black p-6;
+    @apply rounded-xl shadow-sm border border-black dark:border-neutral-700 p-6 transition-colors duration-200;
+  }
+  
+  .dark .journal-card {
+    background-color: #eab636; /* Darker variant of accent-600 */
   }
   
   .resources-card {
     background-color: #FA744D;
-    @apply rounded-xl shadow-sm border border-black p-6;
+    @apply rounded-xl shadow-sm border border-black dark:border-neutral-700 p-6 transition-colors duration-200;
+  }
+  
+  .dark .resources-card {
+    background-color: #b84724; /* Darker variant of coral-800 */
   }
   
   .btn-primary {
-    @apply bg-primary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 transition-colors duration-200 border border-black;
+    @apply bg-primary-500 dark:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-200 border border-black dark:border-neutral-600;
   }
   
   .btn-secondary {
-    @apply bg-neutral-100 text-neutral-700 px-6 py-3 rounded-lg font-medium hover:bg-neutral-200 transition-colors duration-200 border border-black;
+    @apply bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 px-6 py-3 rounded-lg font-medium hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors duration-200 border border-black dark:border-neutral-600;
   }
 } 

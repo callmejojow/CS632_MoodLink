@@ -179,19 +179,19 @@ const MoodTrends = ({ moodEntries }) => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-800 mb-2">Mood Trends</h1>
-        <p className="text-neutral-600">Track your mood patterns over time</p>
+        <h1 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-2">Mood Trends</h1>
+        <p className="text-neutral-600 dark:text-neutral-300">Track your mood patterns over time</p>
       </div>
 
       {moodEntries.length === 0 ? (
         <div className="card text-center py-12">
-          <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-neutral-400 dark:text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-neutral-800 mb-2">No mood data yet</h3>
-          <p className="text-neutral-600 mb-4">Start tracking your moods to see your patterns and trends.</p>
+          <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2">No mood data yet</h3>
+          <p className="text-neutral-600 dark:text-neutral-300 mb-4">Start tracking your moods to see your patterns and trends.</p>
           <button className="btn-primary">Track Your First Mood</button>
         </div>
       ) : (
@@ -199,16 +199,16 @@ const MoodTrends = ({ moodEntries }) => {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="card">
-              <div className="text-2xl font-bold text-primary-600">{moodStats.totalEntries}</div>
-              <div className="text-sm text-neutral-600">Total Entries</div>
+              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">{moodStats.totalEntries}</div>
+              <div className="text-sm text-neutral-600 dark:text-neutral-400">Total Entries</div>
             </div>
             <div className="card">
-              <div className="text-2xl font-bold text-secondary-600 capitalize">{moodStats.mostCommonMood}</div>
-              <div className="text-sm text-neutral-600">Most Common Mood</div>
+              <div className="text-2xl font-bold text-secondary-600 dark:text-secondary-400 capitalize">{moodStats.mostCommonMood}</div>
+              <div className="text-sm text-neutral-600 dark:text-neutral-400">Most Common Mood</div>
             </div>
             <div className="card">
-              <div className="text-2xl font-bold text-neutral-600">{Math.round((moodStats.mostCommonCount / moodStats.totalEntries) * 100)}%</div>
-              <div className="text-sm text-neutral-600">of the time</div>
+              <div className="text-2xl font-bold text-neutral-600 dark:text-neutral-300">{Math.round((moodStats.mostCommonCount / moodStats.totalEntries) * 100)}%</div>
+              <div className="text-sm text-neutral-600 dark:text-neutral-400">of the time</div>
             </div>
           </div>
 
@@ -216,11 +216,11 @@ const MoodTrends = ({ moodEntries }) => {
           <div className="card">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
               <div>
-                <h3 className="text-lg font-semibold text-neutral-800">
+                <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100">
                   {timeView === 'daily' ? 'Daily Mood Wave' : 'Mood Chart'}
                 </h3>
                 {timeView === 'daily' && (
-                  <p className="text-sm text-neutral-500 mt-1">
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                     {selectedDate.toLocaleDateString('en-US', { 
                       weekday: 'long', 
                       year: 'numeric', 
@@ -235,7 +235,7 @@ const MoodTrends = ({ moodEntries }) => {
                 <button
                   onClick={() => setTimeView('daily')}
                   className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                    timeView === 'daily' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                    timeView === 'daily' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                   }`}
                 >
                   Daily
@@ -243,7 +243,7 @@ const MoodTrends = ({ moodEntries }) => {
                 <button
                   onClick={() => setTimeView('week')}
                   className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                    timeView === 'week' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                    timeView === 'week' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                   }`}
                 >
                   Week
@@ -251,7 +251,7 @@ const MoodTrends = ({ moodEntries }) => {
                 <button
                   onClick={() => setTimeView('month')}
                   className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                    timeView === 'month' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                    timeView === 'month' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                   }`}
                 >
                   Month
@@ -259,7 +259,7 @@ const MoodTrends = ({ moodEntries }) => {
                 <button
                   onClick={() => setTimeView('year')}
                   className={`px-3 py-1 text-sm rounded-lg transition-colors duration-200 ${
-                    timeView === 'year' ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                    timeView === 'year' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
                   }`}
                 >
                   Year
@@ -272,19 +272,19 @@ const MoodTrends = ({ moodEntries }) => {
               <div className="flex items-center justify-center space-x-4 mb-6">
                 <button
                   onClick={() => navigateDay('prev')}
-                  className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+                  className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200 text-neutral-600 dark:text-neutral-300"
                   disabled={getDaysWithEntries().findIndex(date => date === selectedDate.toDateString()) >= getDaysWithEntries().length - 1}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
-                <span className="text-sm font-medium text-neutral-600">
+                <span className="text-sm font-medium text-neutral-600 dark:text-neutral-300">
                   {chartData.filter(d => d.hasData).length} entries on this day
                 </span>
                 <button
                   onClick={() => navigateDay('next')}
-                  className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+                  className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200 text-neutral-600 dark:text-neutral-300"
                   disabled={getDaysWithEntries().findIndex(date => date === selectedDate.toDateString()) <= 0}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -414,9 +414,9 @@ const MoodTrends = ({ moodEntries }) => {
                 </svg>
               </div>
             ) : (
-              <div className="text-center py-12 text-neutral-400">
+              <div className="text-center py-12 text-neutral-400 dark:text-neutral-500">
                 <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
                 <p className="text-lg font-medium">
                   {timeView === 'daily' ? 'No mood entries for this day' : 'No data for selected period'}
@@ -431,7 +431,7 @@ const MoodTrends = ({ moodEntries }) => {
           {/* 7-Day Calendar - Hide in daily view */}
           {timeView !== 'daily' && (
             <div className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-6">Last 7 Days</h3>
+              <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-6">Last 7 Days</h3>
               <div className="grid grid-cols-7 gap-3 sm:gap-4">
                 {getLast7Days().map((date, index) => {
                   const moodEntry = getMoodForDate(date);
@@ -440,10 +440,10 @@ const MoodTrends = ({ moodEntries }) => {
                   
                   return (
                     <div key={index} className="flex flex-col items-center space-y-2">
-                      <div className="text-xs text-neutral-500 font-medium min-h-[1rem] flex items-center">{dayName}</div>
+                      <div className="text-xs text-neutral-500 dark:text-neutral-400 font-medium min-h-[1rem] flex items-center">{dayName}</div>
                       <div 
                         className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white font-medium cursor-pointer transition-all duration-200 flex-shrink-0 ${
-                          moodEntry ? getMoodColor(moodEntry.mood.id) + ' hover:scale-105 shadow-sm' : 'bg-neutral-100 text-neutral-400'
+                          moodEntry ? getMoodColor(moodEntry.mood.id) + ' hover:scale-105 shadow-sm' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-400 dark:text-neutral-500'
                         }`}
                         onClick={() => {
                           if (moodEntry) {
@@ -458,7 +458,7 @@ const MoodTrends = ({ moodEntries }) => {
                           <span className="text-sm sm:text-base font-semibold">{dayNumber}</span>
                         )}
                       </div>
-                      <div className="text-xs text-neutral-500 font-medium min-h-[1rem] flex items-center">{dayNumber}</div>
+                      <div className="text-xs text-neutral-500 dark:text-neutral-400 font-medium min-h-[1rem] flex items-center">{dayNumber}</div>
                     </div>
                   );
                 })}
@@ -468,15 +468,15 @@ const MoodTrends = ({ moodEntries }) => {
 
           {/* Recent Entries */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-neutral-800 mb-4">Recent Entries</h3>
+            <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-4">Recent Entries</h3>
             <div className="space-y-3">
               {moodEntries.slice(0, 5).map((entry) => (
-                <div key={entry.id} className="flex items-center justify-between py-2 border-b border-neutral-100 last:border-b-0">
+                <div key={entry.id} className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-700 last:border-b-0">
                   <div className="flex items-center space-x-3">
                     <div className="text-2xl">{entry.mood.emoji}</div>
                     <div>
-                      <div className="font-medium text-neutral-800 capitalize">{entry.mood.label}</div>
-                      <div className="text-sm text-neutral-500">
+                      <div className="font-medium text-neutral-800 dark:text-neutral-100 capitalize">{entry.mood.label}</div>
+                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
                         {new Date(entry.timestamp).toLocaleDateString('en-US', { 
                           month: 'short', 
                           day: 'numeric',
@@ -487,7 +487,7 @@ const MoodTrends = ({ moodEntries }) => {
                     </div>
                   </div>
                   {entry.note && (
-                    <div className="text-sm text-neutral-600 max-w-xs truncate">
+                    <div className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs truncate">
                       "{entry.note}"
                     </div>
                   )}

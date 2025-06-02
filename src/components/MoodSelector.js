@@ -75,10 +75,10 @@ const MoodSelector = ({ selectedMood, onMoodSelect }) => {
             key={`${mood.id}-label`}
             className={`text-center text-xs sm:text-sm font-medium transition-colors duration-200 min-w-[3rem] sm:min-w-[4rem] ${
               selectedMood?.id === mood.id 
-                ? 'text-primary-600' 
+                ? 'text-primary-600 dark:text-primary-400' 
                 : selectedMood
-                ? 'text-gray-500'
-                : 'text-neutral-600'
+                ? 'text-gray-500 dark:text-gray-400'
+                : 'text-neutral-600 dark:text-neutral-300'
             }`}
           >
             {mood.label}
