@@ -24,10 +24,10 @@ const Journal = ({ moodEntries }) => {
       ) : (
         <div className="space-y-6">
           {entriesWithNotes.map((entry) => (
-            <div key={entry.id} className="card">
+            <div key={entry.id} className="journal-card">
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center border border-black">
                     <span className="text-xl">{entry.mood.emoji}</span>
                   </div>
                 </div>
@@ -37,7 +37,7 @@ const Journal = ({ moodEntries }) => {
                       <h3 className="text-lg font-semibold text-neutral-800 capitalize">
                         Feeling {entry.mood.label}
                       </h3>
-                      <p className="text-sm text-neutral-500">
+                      <p className="text-sm text-neutral-600">
                         {new Date(entry.timestamp).toLocaleDateString('en-US', {
                           weekday: 'long',
                           year: 'numeric',
@@ -50,7 +50,7 @@ const Journal = ({ moodEntries }) => {
                     </div>
                   </div>
                   <div className="prose prose-sm max-w-none">
-                    <p className="text-neutral-700 leading-relaxed whitespace-pre-wrap">
+                    <p className="text-neutral-800 leading-relaxed whitespace-pre-wrap">
                       {entry.note}
                     </p>
                   </div>
@@ -62,7 +62,7 @@ const Journal = ({ moodEntries }) => {
       )}
 
       {/* Journal Tips */}
-      <div className="card bg-primary-50 border-primary-200">
+      <div className="card">
         <div className="flex items-start space-x-3">
           <div className="flex-shrink-0">
             <svg className="w-6 h-6 text-primary-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

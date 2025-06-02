@@ -39,7 +39,7 @@ function App() {
   const renderCurrentView = () => {
     switch (currentView) {
       case 'dashboard':
-        return <Dashboard addMoodEntry={addMoodEntry} />;
+        return <Dashboard addMoodEntry={addMoodEntry} moodEntries={moodEntries} setCurrentView={setCurrentView} />;
       case 'mood-tracker':
         return <MoodTrends moodEntries={moodEntries} />;
       case 'journal':
@@ -51,14 +51,14 @@ function App() {
       case 'crisis-support':
         return <CrisisSupport />;
       default:
-        return <Dashboard addMoodEntry={addMoodEntry} />;
+        return <Dashboard addMoodEntry={addMoodEntry} moodEntries={moodEntries} setCurrentView={setCurrentView} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-stone-100 flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-neutral-200">
+      <header className="bg-neutral-50 shadow-sm border-b border-black flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div>
@@ -67,7 +67,7 @@ function App() {
             </div>
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+              className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200 border border-black bg-neutral-50"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@ function App() {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex flex-1 min-h-0">
         {/* Sidebar */}
         <Sidebar 
           isOpen={sidebarOpen}
@@ -88,8 +88,8 @@ function App() {
         />
 
         {/* Main Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
-          <div className="max-w-4xl mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+          <div className="max-w-6xl mx-auto">
             {renderCurrentView()}
           </div>
         </main>

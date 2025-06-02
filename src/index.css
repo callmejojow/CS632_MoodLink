@@ -8,28 +8,70 @@
   }
   
   body {
-    @apply bg-neutral-50 text-neutral-800;
+    @apply bg-stone-100 text-neutral-800;
+    min-height: 100vh;
   }
 }
 
 @layer components {
   .mood-button {
-    @apply w-16 h-16 rounded-full flex items-center justify-center text-2xl transition-all duration-200 border-2 border-transparent hover:scale-105;
+    @apply w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-xl sm:text-2xl transition-all duration-200 border-2 border-transparent hover:scale-105;
+    min-width: 3rem; /* Smaller minimum width for mobile */
+    min-height: 3rem; /* Smaller minimum height for mobile */
+    flex-shrink: 0;
+    margin: 0.25rem; /* Add margin to prevent clipping when scaled */
+  }
+  
+  @media (min-width: 640px) {
+    .mood-button {
+      min-width: 4rem;
+      min-height: 4rem;
+    }
   }
   
   .mood-button.selected {
     @apply border-primary-500 bg-primary-50 scale-105;
   }
   
+  .mood-button.selected-mood {
+    @apply border-transparent scale-105;
+  }
+  
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-neutral-200 p-6;
+    @apply bg-neutral-50 rounded-xl shadow-sm border border-black p-6;
+  }
+  
+  /* Specific component background colors */
+  .mood-selector-card {
+    background-color: #CEE397;
+    @apply rounded-xl shadow-sm border border-black p-6;
+  }
+  
+  .insights-card {
+    background-color: #4059AD;
+    @apply rounded-xl shadow-sm border border-black p-6;
+  }
+  
+  .mood-trends-card {
+    background-color: #F8A460;
+    @apply rounded-xl shadow-sm border border-black p-6;
+  }
+  
+  .journal-card {
+    background-color: #FED880;
+    @apply rounded-xl shadow-sm border border-black p-6;
+  }
+  
+  .resources-card {
+    background-color: #FA744D;
+    @apply rounded-xl shadow-sm border border-black p-6;
   }
   
   .btn-primary {
-    @apply bg-primary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 transition-colors duration-200;
+    @apply bg-primary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 transition-colors duration-200 border border-black;
   }
   
   .btn-secondary {
-    @apply bg-neutral-100 text-neutral-700 px-6 py-3 rounded-lg font-medium hover:bg-neutral-200 transition-colors duration-200;
+    @apply bg-neutral-100 text-neutral-700 px-6 py-3 rounded-lg font-medium hover:bg-neutral-200 transition-colors duration-200 border border-black;
   }
 } 

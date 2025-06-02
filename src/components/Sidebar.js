@@ -62,25 +62,25 @@ const Sidebar = ({ isOpen, currentView, setCurrentView, setSidebarOpen }) => {
   };
 
   return (
-    <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white shadow-lg border-r border-neutral-200 transform transition-transform duration-300 ease-in-out ${
+    <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-neutral-50 shadow-lg border-r border-black transform transition-transform duration-300 ease-in-out min-h-screen ${
       isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
     }`}>
-      <div className="flex flex-col h-full">
-        <div className="p-6">
+      <div className="flex flex-col h-screen lg:h-full min-h-screen">
+        <div className="p-6 border-b border-black flex-shrink-0">
           <h2 className="text-lg font-semibold text-neutral-800">Menu</h2>
         </div>
         
-        <nav className="flex-1 px-4 pb-4 space-y-2">
+        <nav className="flex-1 px-4 pb-4 space-y-2 mt-4 overflow-y-auto">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleMenuClick(item.id)}
-              className={`group w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${
+              className={`group w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 border border-black ${
                 currentView === item.id
-                  ? 'bg-primary-50 text-primary-700 border-primary-200'
+                  ? 'bg-primary-100 text-primary-700'
                   : item.special
-                  ? 'text-danger-600 hover:bg-danger-50'
-                  : 'text-neutral-700 hover:bg-neutral-100'
+                  ? 'text-danger-600 hover:bg-danger-50 bg-neutral-50'
+                  : 'text-neutral-700 hover:bg-neutral-100 bg-neutral-50'
               }`}
             >
               <span className="mr-3">
@@ -91,7 +91,7 @@ const Sidebar = ({ isOpen, currentView, setCurrentView, setSidebarOpen }) => {
           ))}
         </nav>
         
-        <div className="p-4 border-t border-neutral-200">
+        <div className="p-4 border-t border-black flex-shrink-0">
           <p className="text-xs text-neutral-500 text-center">
             MoodLink v1.0.0
           </p>
