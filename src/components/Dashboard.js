@@ -92,12 +92,10 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
   };
 
   const chartData = generateChartData();
-  const maxValue = 5;
 
   // Create SVG path for the line chart
   const createPath = () => {
     const width = 355;
-    const height = 200;
     const dataPoints = chartData.filter(d => d.hasData);
     
     if (dataPoints.length < 1) return '';
@@ -105,7 +103,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
     if (dataPoints.length === 1) {
       // Single point
       const x = width / 2;
-      const y = height - (dataPoints[0].value / 5) * height;
+      const y = (5 - dataPoints[0].value) * 40 + 50; // Fixed Y positioning
       return `M ${x},${y} L ${x},${y}`;
     }
     
@@ -113,7 +111,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
       // For daily view, space points horizontally and evenly
       const points = dataPoints.map((d, index) => {
         const x = dataPoints.length === 1 ? width / 2 : (index / (dataPoints.length - 1)) * width;
-        const y = height - (d.value / 5) * height;
+        const y = (5 - d.value) * 40 + 50; // Fixed Y positioning
         return `${x},${y}`;
       });
       
@@ -124,7 +122,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
         const xStep = width / (chartData.length - 1);
         const originalIndex = chartData.findIndex(point => point === d);
         const x = originalIndex * xStep;
-        const y = height - (d.value / 5) * height;
+        const y = (5 - d.value) * 40 + 50; // Fixed Y positioning
         return `${x},${y}`;
       });
       
@@ -317,19 +315,19 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
             <div className="overflow-x-auto">
               <svg width="400" height="250" className="w-full max-w-full">
                 {/* Y-axis labels */}
-                {['Sad', 'Low', 'Okay', 'Good', 'Great'].map((label, index) => (
+                {['Great', 'Good', 'Okay', 'Low', 'Sad'].map((label, index) => (
                   <g key={label}>
                     <line
                       x1="40"
-                      y1={250 - 40 - (index * 40)}
+                      y1={50 + (index * 40)}
                       x2="400"
-                      y2={250 - 40 - (index * 40)}
+                      y2={50 + (index * 40)}
                       stroke="#f5f5f5"
                       strokeWidth="1"
                     />
                     <text
                       x="35"
-                      y={250 - 40 - (index * 40) + 4}
+                      y={50 + (index * 40) + 4}
                       fontSize="12"
                       fill="#737373"
                       textAnchor="end"
@@ -358,12 +356,12 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
                     if (trendView === 'daily') {
                       const dataPoints = chartData.filter(point => point.hasData);
                       x = dataPoints.length === 1 ? 355 / 2 : (index / (dataPoints.length - 1)) * 355;
-                      y = 200 - (d.value / 5) * 200;
+                      y = (5 - d.value) * 40 + 50; // Fixed Y positioning
                     } else {
                       const xStep = 355 / (chartData.length - 1);
                       const originalIndex = chartData.findIndex(point => point === d);
                       x = originalIndex * xStep;
-                      y = 200 - (d.value / 5) * 200;
+                      y = (5 - d.value) * 40 + 50; // Fixed Y positioning
                     }
                     
                     return (
@@ -382,7 +380,7 @@ const Dashboard = ({ addMoodEntry, moodEntries, setCurrentView }) => {
                           className="hover:fill-primary-100 cursor-pointer"
                         />
                         {/* Emoji indicator for daily view */}
-                        {trendView === 'daily' && (
+                        {trendView === 'daily' && d.mood && (
                           <text
                             x={x}
                             y={y - 15}

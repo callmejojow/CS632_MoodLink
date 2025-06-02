@@ -1,13 +1,25 @@
 import React from 'react';
 
-const Journal = ({ moodEntries }) => {
+const Journal = ({ moodEntries, setCurrentView }) => {
   const entriesWithNotes = moodEntries.filter(entry => entry.note && entry.note.trim());
+
+  // Get background color based on mood
+  const getMoodBackgroundColor = (moodId) => {
+    const moodColors = {
+      great: 'bg-emerald-100',
+      good: 'bg-sky-100', 
+      okay: 'bg-yellow-100',
+      low: 'bg-zinc-100',
+      sad: 'bg-red-100'
+    };
+    return moodColors[moodId] || 'bg-neutral-100';
+  };
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-neutral-800 mb-2">Journal</h1>
-        <p className="text-neutral-600">Reflect on your thoughts and feelings</p>
+        <p className="text-neutral-600">Your personal collection of mood entries with notes and reflections</p>
       </div>
 
       {entriesWithNotes.length === 0 ? (
@@ -18,16 +30,27 @@ const Journal = ({ moodEntries }) => {
             </svg>
           </div>
           <h3 className="text-lg font-semibold text-neutral-800 mb-2">No journal entries yet</h3>
-          <p className="text-neutral-600 mb-4">Start adding notes to your mood entries to build your personal journal.</p>
-          <button className="btn-primary">Track Your First Mood</button>
+          <p className="text-neutral-600 mb-6 max-w-md mx-auto">
+            Your journal will display all your mood entries that include personal notes and reflections. 
+            Track your mood with notes on the dashboard to start building your journal.
+          </p>
+          <button 
+            onClick={() => setCurrentView('dashboard')}
+            className="btn-primary"
+          >
+            Write Your First Journal Entry
+          </button>
         </div>
       ) : (
         <div className="space-y-6">
           {entriesWithNotes.map((entry) => (
-            <div key={entry.id} className="journal-card">
+            <div 
+              key={entry.id} 
+              className={`${getMoodBackgroundColor(entry.mood.id)} rounded-xl shadow-sm border border-black p-6`}
+            >
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center border border-black">
+                  <div className="w-12 h-12 bg-neutral-50 rounded-full flex items-center justify-center border border-black">
                     <span className="text-xl">{entry.mood.emoji}</span>
                   </div>
                 </div>
@@ -70,8 +93,9 @@ const Journal = ({ moodEntries }) => {
             </svg>
           </div>
           <div>
-            <h4 className="font-semibold text-primary-800 mb-2">Journal Tips</h4>
+            <h4 className="font-semibold text-primary-800 mb-2">How to Build Your Journal</h4>
             <ul className="text-primary-700 text-sm space-y-1">
+              <li>• Track your mood on the dashboard and add a note</li>
               <li>• Write about what triggered your mood</li>
               <li>• Describe your thoughts and feelings</li>
               <li>• Note what you're grateful for</li>

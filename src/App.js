@@ -43,7 +43,7 @@ function App() {
       case 'mood-tracker':
         return <MoodTrends moodEntries={moodEntries} />;
       case 'journal':
-        return <Journal moodEntries={moodEntries} />;
+        return <Journal moodEntries={moodEntries} setCurrentView={setCurrentView} />;
       case 'resources':
         return <Resources />;
       case 'settings':
@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="min-h-screen bg-stone-100 flex flex-col">
       {/* Header */}
-      <header className="bg-neutral-50 shadow-sm border-b border-black flex-shrink-0">
+      <header className="bg-accent-400/20 shadow-sm border-b border-black flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div>
@@ -67,7 +67,7 @@ function App() {
             </div>
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200 border border-black bg-neutral-50"
+              className="p-2 rounded-lg hover:bg-accent-400/50 transition-colors duration-200 border border-black bg-accent-400"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,17 +88,17 @@ function App() {
         />
 
         {/* Main Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+        <main className={`flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto transition-all duration-300 ${sidebarOpen ? 'ml-0' : ''}`}>
           <div className="max-w-6xl mx-auto">
             {renderCurrentView()}
           </div>
         </main>
       </div>
 
-      {/* Overlay for mobile sidebar */}
+      {/* Overlay for sidebar (for mobile, but harmless on desktop) */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={() => setSidebarOpen(false)}
         />
       )}

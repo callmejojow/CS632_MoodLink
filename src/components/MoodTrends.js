@@ -96,7 +96,6 @@ const MoodTrends = ({ moodEntries }) => {
   // Create SVG path for the line chart
   const createPath = () => {
     const width = 355;
-    const height = 200;
     const dataPoints = chartData.filter(d => d.hasData);
     
     if (dataPoints.length < 1) return '';
@@ -104,7 +103,7 @@ const MoodTrends = ({ moodEntries }) => {
     if (dataPoints.length === 1) {
       // Single point
       const x = width / 2;
-      const y = height - (dataPoints[0].value / 5) * height;
+      const y = (5 - dataPoints[0].value) * 40 + 50; // Fixed Y positioning
       return `M ${x},${y} L ${x},${y}`;
     }
     
@@ -112,7 +111,7 @@ const MoodTrends = ({ moodEntries }) => {
       // For daily view, space points horizontally and evenly
       const points = dataPoints.map((d, index) => {
         const x = dataPoints.length === 1 ? width / 2 : (index / (dataPoints.length - 1)) * width;
-        const y = height - (d.value / 5) * height;
+        const y = (5 - d.value) * 40 + 50; // Fixed Y positioning
         return `${x},${y}`;
       });
       
@@ -123,7 +122,7 @@ const MoodTrends = ({ moodEntries }) => {
         const xStep = width / (chartData.length - 1);
         const originalIndex = chartData.findIndex(point => point === d);
         const x = originalIndex * xStep;
-        const y = height - (d.value / 5) * height;
+        const y = (5 - d.value) * 40 + 50; // Fixed Y positioning
         return `${x},${y}`;
       });
       
@@ -299,19 +298,19 @@ const MoodTrends = ({ moodEntries }) => {
               <div className="overflow-x-auto">
                 <svg width="400" height="250" className="w-full max-w-full">
                   {/* Y-axis labels */}
-                  {['Sad', 'Low', 'Okay', 'Good', 'Great'].map((label, index) => (
+                  {['Great', 'Good', 'Okay', 'Low', 'Sad'].map((label, index) => (
                     <g key={label}>
                       <line
                         x1="40"
-                        y1={250 - 40 - (index * 40)}
+                        y1={50 + (index * 40)}
                         x2="400"
-                        y2={250 - 40 - (index * 40)}
+                        y2={50 + (index * 40)}
                         stroke="#f5f5f5"
                         strokeWidth="1"
                       />
                       <text
                         x="35"
-                        y={250 - 40 - (index * 40) + 4}
+                        y={50 + (index * 40) + 4}
                         fontSize="12"
                         fill="#737373"
                         textAnchor="end"
@@ -340,12 +339,12 @@ const MoodTrends = ({ moodEntries }) => {
                       if (timeView === 'daily') {
                         const dataPoints = chartData.filter(point => point.hasData);
                         x = dataPoints.length === 1 ? 355 / 2 : (index / (dataPoints.length - 1)) * 355;
-                        y = 200 - (d.value / 5) * 200;
+                        y = (5 - d.value) * 40 + 50; // Fixed Y positioning
                       } else {
                         const xStep = 355 / (chartData.length - 1);
                         const originalIndex = chartData.findIndex(point => point === d);
                         x = originalIndex * xStep;
-                        y = 200 - (d.value / 5) * 200;
+                        y = (5 - d.value) * 40 + 50; // Fixed Y positioning
                       }
                       
                       return (
@@ -364,7 +363,7 @@ const MoodTrends = ({ moodEntries }) => {
                             className="hover:fill-primary-100 cursor-pointer"
                           />
                           {/* Emoji indicator for daily view */}
-                          {timeView === 'daily' && (
+                          {timeView === 'daily' && d.mood && (
                             <text
                               x={x}
                               y={y - 15}
@@ -432,19 +431,19 @@ const MoodTrends = ({ moodEntries }) => {
           {/* 7-Day Calendar - Hide in daily view */}
           {timeView !== 'daily' && (
             <div className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-4">Last 7 Days</h3>
-              <div className="grid grid-cols-7 gap-2">
+              <h3 className="text-lg font-semibold text-neutral-800 mb-6">Last 7 Days</h3>
+              <div className="grid grid-cols-7 gap-3 sm:gap-4">
                 {getLast7Days().map((date, index) => {
                   const moodEntry = getMoodForDate(date);
                   const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
                   const dayNumber = date.getDate();
                   
                   return (
-                    <div key={index} className="text-center">
-                      <div className="text-xs text-neutral-500 mb-1">{dayName}</div>
+                    <div key={index} className="flex flex-col items-center space-y-2">
+                      <div className="text-xs text-neutral-500 font-medium min-h-[1rem] flex items-center">{dayName}</div>
                       <div 
-                        className={`w-12 h-12 rounded-lg flex items-center justify-center text-white font-medium cursor-pointer transition-all duration-200 ${
-                          moodEntry ? getMoodColor(moodEntry.mood.id) + ' hover:scale-105' : 'bg-neutral-100 text-neutral-400'
+                        className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white font-medium cursor-pointer transition-all duration-200 flex-shrink-0 ${
+                          moodEntry ? getMoodColor(moodEntry.mood.id) + ' hover:scale-105 shadow-sm' : 'bg-neutral-100 text-neutral-400'
                         }`}
                         onClick={() => {
                           if (moodEntry) {
@@ -453,9 +452,13 @@ const MoodTrends = ({ moodEntries }) => {
                           }
                         }}
                       >
-                        {moodEntry ? moodEntry.mood.emoji : dayNumber}
+                        {moodEntry ? (
+                          <span className="text-lg sm:text-xl">{moodEntry.mood.emoji}</span>
+                        ) : (
+                          <span className="text-sm sm:text-base font-semibold">{dayNumber}</span>
+                        )}
                       </div>
-                      <div className="text-xs text-neutral-500 mt-1">{dayNumber}</div>
+                      <div className="text-xs text-neutral-500 font-medium min-h-[1rem] flex items-center">{dayNumber}</div>
                     </div>
                   );
                 })}

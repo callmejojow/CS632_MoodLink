@@ -62,10 +62,10 @@ const Sidebar = ({ isOpen, currentView, setCurrentView, setSidebarOpen }) => {
   };
 
   return (
-    <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-neutral-50 shadow-lg border-r border-black transform transition-transform duration-300 ease-in-out min-h-screen ${
-      isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-    }`}>
-      <div className="flex flex-col h-screen lg:h-full min-h-screen">
+    <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-neutral-50 shadow-lg border-r border-black transform transition-transform duration-300 ease-in-out min-h-screen
+      ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+    >
+      <div className="flex flex-col h-screen min-h-screen">
         <div className="p-6 border-b border-black flex-shrink-0">
           <h2 className="text-lg font-semibold text-neutral-800">Menu</h2>
         </div>
